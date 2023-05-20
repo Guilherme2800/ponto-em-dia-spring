@@ -1,6 +1,8 @@
 package br.com.pontoemdia.model.service;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.pontoemdia.model.TipoUsuario;
 import br.com.pontoemdia.model.Usuario;
 import br.com.pontoemdia.repository.UsuarioRepository;
 import br.com.pontoemdia.web.form.AlterarPerfilForm;
+import br.com.pontoemdia.web.form.CadastrarUsuarioForm;
 
 /**
  * 
@@ -64,6 +68,33 @@ public class UsuarioService {
 
 	public List<Usuario> buscarTodosUsuario() {
 		return usuarioRepository.findAll();
+	}
+	
+	public String cadastrarUsuario(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		CadastrarUsuarioForm userEdit = (CadastrarUsuarioForm) req.getSession().getAttribute("scopedTarget.cadastrarUsuarioForm");
+		
+		Usuario usuario = new Usuario();
+		usuario.setNome(userEdit.getNome());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			usuario.setDataNascimento(sdf.parse(userEdit.getNascimento()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		usuario.setLogin(userEdit.getLogin());
+		usuario.setSenha(userEdit.getSenha());
+		usuario.setTipoUsuario(TipoUsuario.valueOf(userEdit.getTipoUsuario()));
+		usuario.setCargo(userEdit.getCargo());
+		usuario.setCpf(userEdit.getCpf());
+		
+		usuarioRepository.save(usuario);
+		
+		req.getSession().removeAttribute("scopedTarget.cadastrarUsuarioForm");
+		
+		return "forward:cadastrarUsuario.xhtml";
 	}
 
 }

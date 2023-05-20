@@ -43,6 +43,9 @@ public class UsuarioController extends HttpServlet {
 		case "alterarPerfil":
 			metodo = usuarioService.alterarPerfil(req, resp);
 			break;
+		case "cadastrarUsuario":
+			metodo = usuarioService.cadastrarUsuario(req, resp);
+			break;
 		}
 
 		String[] split = metodo.split(":");
