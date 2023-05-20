@@ -1,0 +1,9 @@
+@charset "ISO-8859-1";
+
+.tabelaPontos{
+	background-color: white; overflow-y: auto;  padding: 5px;
+}
+
+.inputDatas{
+	background-color: white; padding: 5px;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<body>	
+	<header class="header" id="header">
+		<div class="header_toggle">
+			<i class='bx bx-menu' id="header-toggle"></i>
+		</div>
+		<div class="header_img"> 
+		   <c:if test="${usuario.urlImagem != null and usuario.urlImagem != ''}">
+		      <img src="${usuario.urlImagem}" alt=""/> 
+		   </c:if>
+		   <c:if test="${usuario.urlImagem == null or usuario.urlImagem == ''}">
+		      <img src="img/user-default.png" alt=""/> 
+		   </c:if>
+		</div>
+	</header>
+	<div class="l-navbar" id="nav-bar">
+		<nav class="nav">
+			<div>
+				<a href="entrada?acao=ExibirRegistrar" class="nav_logo"> <i
+					class='bx bx-alarm nav_logo-icon'></i> <span class="nav_logo-name">Ponto em Dia</span>
+				</a>
+				<div class="nav_list">
+				    
+				    <!-- Pagina de Registrar ponto -->
+				    
+				    <c:if test="${pagina == 'registrarPonto'}">
+				       <a href="entrada?acao=ExibirRegistrar" class="nav_link active"> <i class='bx bx-message-square-detail nav_icon'></i> 
+					   <span class="nav_name">Registrar Ponto</span>
+					   </a>
+				    </c:if>
+				    
+				    <c:if test="${pagina != 'registrarPonto'}">
+				       <a href="entrada?acao=ExibirRegistrar" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> 
+					   <span class="nav_name">Registrar Ponto</span>
+					   </a>
+				    </c:if>
+				    
+				    <!-- Pagina de dashBord Admin -->
+
+					
+					 <!-- Pagina de dashBord --> 
+
+					
+					<!-- Pagina de historico de pontos admin --> 
+					
+					<!-- Pagina de historico de pontos individual --> 
+					
+					<c:if test="${ pagina == 'historico'}">
+					   <a href="entrada?acao=ExibirHistoricoUsuario" class="nav_link active"> <i class='bx bx-folder nav_icon'></i>
+					   <span class="nav_name">Historico</span>
+					   </a>
+					</c:if>
+					
+					<c:if test="${ pagina != 'historico'}">
+					   <a href="entrada?acao=ExibirHistoricoUsuario" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
+					   <span class="nav_name">Historico</span>
+					   </a>
+					</c:if>
+					
+					<!-- Pagina de historico de cadastro de usu�rios -->  
+					
+					<c:if test="${ pagina == 'perfil'}">
+					      <a href="usuario?acao=ExibirPerfil" class="nav_link active"> <i class='bx bx-user nav_icon'></i> 
+					      <span class="nav_name">Meu perfil</span>
+					      </a>
+					</c:if>
+					   
+					<c:if test="${ pagina != 'perfil'}">
+					      <a href="usuario?acao=ExibirPerfil" class="nav_link"> <i class='bx bx-user nav_icon'></i> 
+					      <span class="nav_name">Meu perfil</span>
+					      </a>
+					</c:if>
+					
+					
+				</div>
+			</div>
+			<a href="entrada?acao=Logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i>
+				<span class="nav_name">SignOut</span>
+			</a>
+		</nav>
+	</div>
+
+</body>
+ <script src="../scripts/sidebar.js"></script>
+</html>

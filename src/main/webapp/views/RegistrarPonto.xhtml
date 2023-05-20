@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+	<title>Ponto em dia - Registrar Ponto</title>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- CSS only -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+		crossorigin="anonymous" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+	<link rel="shortcut icon" href="img/favicon-16x16.png" />
+	<link rel="stylesheet" href="css/cardUsuario.css" />
+	<link rel="stylesheet" href="css/sidebar.css" />
+</h:head>
+<h:body id="body-pd">
+	<ui:include src="sideBar.xhtml" />
+	<!--Container Main start-->
+	<div class="height-100">
+		<div class="container center-block">
+			<h1>Registrar Ponto</h1>
+			<hr />
+
+			<div class="d-flex justify-content-around">
+				<div class="col-md-6 col-lg-4 item shadow-lg p-3 mb-5 bg-body">
+					<div class="box">
+						<h:panelGroup rendered="#{not empty usuario.urlImagem}">
+							<h:graphicImage value="#{usuario.urlImagem}"
+								styleClass="rounded-circle" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{empty usuario.urlImagem}">
+							<h:graphicImage value="img/user-default.png"
+								styleClass="rounded-circle" />
+						</h:panelGroup>
+						<h3 class="name">#{usuario.nome}</h3>
+						<p class="title">#{usuario.cargo}</p>
+						<p class="description" />
+						<div class="social">
+							<a href="#"><i class="fa fa-facebook-official" /></a> <a
+								href="#"><i class="fa fa-twitter" /></a> <a href="#"><i
+								class="fa fa-instagram" /></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4 item shadow-lg p-3 mb-5 bg-body">
+					<div class="box">
+						<br /> <br />
+						<p>
+							<b>Data e hora atual:</b>
+							<ui:include src="../scripts/DataHoraAtual.xhtml" />
+						</p>
+						<br />
+						<p class="description" />
+						<div>
+							<h:form>
+								<div style="display: none">
+									<h:inputText id="login" value="#{loginForm.login}"
+										class="input100" />
+								</div>
+
+								<h:commandButton styleClass="btn btn-success text-center"
+									value="Registrar ponto" action="#{registrarPontoForm.registrar}"
+									class="login100-form-btn" />
+							</h:form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Ponto em dia - Meu Perfil</title>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<!-- CSS only -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+		crossorigin="anonymous" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+	<link rel="shortcut icon" href="img/favicon-16x16.png" />
+	<link rel="stylesheet" href="css/cardUsuario.css" />
+	<link rel="stylesheet" href="css/sidebar.css" />
+
+</h:head>
+<h:body id="body-pd">
+
+	<ui:include src="sideBar.xhtml" />
+
+	<!-- Container Main start -->
+	<div class="height-100">
+		<div class="container center-block">
+
+			<h1>Perfil do usuário</h1>
+			<hr />
+
+			<div class="container bootstrap snippet">
+
+				<div class="row">
+					<div class="col-sm-3">
+
+						<div class="text-center">
+
+							<c:if test="#{not empty alterarPerfilForm.urlImagem}">
+								<img src="#{alterarPerfilForm.urlImagem}"
+									class="avatar img-circle img-thumbnail" alt="avatar" />
+							</c:if>
+							<c:if test="#{empty alterarPerfilForm.urlImagem}">
+								<img src="img/user-default.png"
+									class="avatar img-circle img-thumbnail" alt="avatar" />
+							</c:if>
+						</div>
+
+					</div>
+
+					<div class="col-sm-9">
+
+						<div class="tab-content">
+							<div class="tab-pane active" id="home">
+								<h:form id="registrationForm">
+
+									<div class="row mb-4">
+										<div class="col">
+											<div class="col-xs-6">
+												<label for="nome">Nome</label>
+												<h:inputText id="nome" styleClass="form-control"
+													value="#{usuario.nome}" readonly="true" />
+											</div>
+										</div>
+										<div class="col">
+											<div class="col-xs-6">
+												<label for="cpf">CPF</label>
+												<h:inputText id="cpf" styleClass="form-control"
+													value="#{usuario.cpf}" readonly="true" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-xs-6">
+											<label for="celular">Celular</label>
+											<h:inputText id="celular" styleClass="form-control"
+												value="#{alterarPerfilForm.celular}" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-xs-6">
+											<label for="email">Email</label>
+											<h:inputText id="email" styleClass="form-control"
+												value="#{alterarPerfilForm.email}" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-xs-6">
+											<label for="image">Url Imagem</label>
+											<h:inputText id="image" styleClass="form-control"
+												value="#{alterarPerfilForm.urlImagem}" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-xs-12">
+											<br />
+
+
+											<h:commandButton styleClass="btn btn-success text-center"
+												value="Salvar alterações"
+												action="#{alterarPerfilForm.alterarPerfil}"
+												class="login100-form-btn" />
+
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h:outputScript library="javax.faces"
+		name="bootstrap/js/bootstrap.bundle.min.js" target="head" />
+
+</h:body>
+</html>

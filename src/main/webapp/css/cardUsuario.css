@@ -1,0 +1,77 @@
+@charset "ISO-8859-1";
+
+
+
+@media (max-width:767px) {
+  .team-boxed h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto;
+}
+
+.intro p {
+  margin-bottom:0;
+}
+
+.people {
+  padding:50px 0;
+}
+
+.item {
+  text-align:center;
+}
+
+.item .box {
+  text-align:center;
+  padding:30px;
+  background-color:#fff;
+  margin-bottom:30px;
+}
+
+.item .name {
+  font-weight:bold;
+  margin-top:28px;
+  margin-bottom:8px;
+  color:inherit;
+}
+
+.item .title {
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#708090;
+  letter-spacing:2px;
+  font-size:13px;
+}
+
+.item .description {
+  font-size:15px;
+  margin-top:15px;
+  margin-bottom:20px;
+}
+
+.item img {
+  max-width:160px;
+}
+
+.social {
+  font-size:18px;
+  color:#a2a8ae;
+}
+
+.social a {
+  color:inherit;
+  margin:0 10px;
+  display:inline-block;
+  opacity:0.7;
+}
+
+.social a:hover {
+  opacity:1;
+}
