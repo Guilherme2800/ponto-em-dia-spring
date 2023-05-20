@@ -16,9 +16,12 @@ public interface PontoRepository extends JpaRepository<Ponto, Long>{
 	public Ponto findByUserIdAndDate(Long userId, String data);
 
 	@Query(value = "SELECT * FROM ponto WHERE user_id = :userId AND data >= :dataInicial AND data <= :dataFinal", nativeQuery = true)
-	public List<Ponto> findByUserIdAndStartDateAndEndDate(Long userId, Date dataInicial, Date dataFinal);
+	public List<Ponto> findByUserIdAndStartDateAndEndDate(Long userId, String dataInicial, String dataFinal);
 	
 	@Query(value = "SELECT * FROM ponto WHERE user_id = :userId", nativeQuery = true)
 	public List<Ponto> findByUserId(Long userId);
+	
+	@Query(value = "SELECT * FROM ponto WHERE user_id = :userId and data = :date", nativeQuery = true)
+	public Ponto buscarPontoDiaAnteriorDoUsuario(Long userId, String date);
 
 }

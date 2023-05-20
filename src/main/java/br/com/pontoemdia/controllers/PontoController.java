@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -48,6 +47,9 @@ public class PontoController extends HttpServlet {
 			break;
 		case "historicoUsuario":
 			metodo = pontoService.buscarHistoricosUsuarioCorrente(req, resp);
+			break;
+		case "dashbord":
+			metodo = pontoService.buildDashbordUserCurrent(req, resp);
 			break;
 		}
 

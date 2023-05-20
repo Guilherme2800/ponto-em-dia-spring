@@ -42,9 +42,9 @@
 			<h:form>
 
 				<h:outputLabel for="dataInicial" value="Data inicial: " />
-				<h:inputText id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}" name="dataInicial" type="date" required="true" />
+				<h:inputText id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}" name="dataInicial" type="date" />
 				<h:outputLabel for="dataFinal" value="Data final: " />
-				<h:inputText id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" name="dataFinal" type="date" required="true" />
+				<h:inputText id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" name="dataFinal" type="date" />
 				<h:commandButton value="Pesquisar"  action="#{buscarPontosUsuarioForm.buscar}" styleClass="btn btn-success" />
 
 			</h:form>

@@ -3,7 +3,12 @@ package br.com.pontoemdia.model.service;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,6 +21,10 @@ import org.springframework.stereotype.Service;
 import br.com.pontoemdia.model.Ponto;
 import br.com.pontoemdia.model.Usuario;
 import br.com.pontoemdia.repository.PontoRepository;
+import br.com.pontoemdia.service.calculoHoras.HorasExtrasMesAtual;
+import br.com.pontoemdia.service.calculoHoras.HorasTrabalhadasDiaAnterior;
+import br.com.pontoemdia.service.calculoHoras.HorasTrabalhadasMesAtual;
+import br.com.pontoemdia.service.calculoHoras.HorasTrabalhadasSemanaAtual;
 import br.com.pontoemdia.web.form.BuscarPontosUsuarioForm;
 
 /**
@@ -54,7 +63,7 @@ public class PontoService {
 		String dataFinalString = form.getDataFinal();
 
 		if (dataInicialString == null || dataInicialString.equals("") || (dataFinalString == null || dataFinalString.equals(""))) {
-			return "forward:historicoPontos.jsp";
+			return "forward:historicoPontos.xhtml";
 		}
 
 		Date dataInicial = null;
@@ -139,8 +148,66 @@ public class PontoService {
 	}
 
 	public List<Ponto> buscarHistoricoDoUsuario(Usuario user, Date dataInicial, Date dataFinal) {
-		return pontoRepository.findByUserIdAndStartDateAndEndDate(user.getId(), dataInicial, dataFinal);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+		String startDate = sdf.format(dataInicial);
+		String endDate = sdf.format(dataFinal);
+		
+		return pontoRepository.findByUserIdAndStartDateAndEndDate(user.getId(), startDate, endDate);
 	}
 
+	public List<Ponto> buscarPontoSemanaAtualDoUsuario(Usuario user) {
+
+		Date dataAtual = new Date();
+
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+		calendar.setTime(dataAtual);
+
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		Date startWeek = calendar.getTime();
+
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+		Date endWeek = calendar.getTime();
+
+		return this.buscarHistoricoDoUsuario(user, startWeek, endWeek);
+	}
+	
+	public List<Ponto> buscarPontosMesAtualDoUsuario(Usuario user) {
+
+		LocalDateTime month = LocalDateTime.now();
+		
+		Date startMonth = Date.from(month.withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).atZone(ZoneId.systemDefault()).toInstant());
+		
+		Date endMonth = Date.from(month.withDayOfMonth(YearMonth.of(month.getYear(), month.getMonth()).lengthOfMonth()).withHour(23).withMinute(59).withSecond(59).atZone(ZoneId.systemDefault()).toInstant());
+
+		return this.buscarHistoricoDoUsuario(user, startMonth, endMonth);
+	}
+	
+	public Ponto buscarPontoDiaAnteriorDoUsuario(Usuario user) {
+
+		Calendar data = Calendar.getInstance();
+		data.add(Calendar.DAY_OF_MONTH, -1);
+
+		return pontoRepository.buscarPontoDiaAnteriorDoUsuario(user.getId(), formatacaoSemHora.format(data.getTime()));
+
+	}
+	
+	public String buildDashbordUserCurrent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		HorasTrabalhadasDiaAnterior horasTrabalhadasDiaAnterior = new HorasTrabalhadasDiaAnterior(this);
+		
+		req.setAttribute("horasExtrasMes", new HorasExtrasMesAtual(this).calcularHoras(req));
+		req.setAttribute("horasTrabalhadasMes", new HorasTrabalhadasMesAtual(this).calcularHoras(req));
+		req.setAttribute("intervaloMes", new HorasTrabalhadasMesAtual(this).intervalo());
+		
+		req.setAttribute("horasTrabalhadasSemana", new HorasTrabalhadasSemanaAtual(this).calcularHoras(req));
+		req.setAttribute("intervaloSemana", new HorasTrabalhadasSemanaAtual(this).intervalo());
+		
+		req.setAttribute("horasTrabDiaAnterior", horasTrabalhadasDiaAnterior.calcularHoras(req));
+		req.setAttribute("intervaloDia", horasTrabalhadasDiaAnterior.intervalo());
+		return "forward:dashbord.xhtml";
+	}
 
 }
