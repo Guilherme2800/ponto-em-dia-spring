@@ -36,12 +36,9 @@
 			<hr />
 
 			<div class="container bootstrap snippet">
-
 				<div class="row">
 					<div class="col-sm-3">
-
 						<div class="text-center">
-
 							<c:if test="#{not empty alterarPerfilForm.urlImagem}">
 								<img src="#{alterarPerfilForm.urlImagem}"
 									class="avatar img-circle img-thumbnail" alt="avatar" />
@@ -51,14 +48,13 @@
 									class="avatar img-circle img-thumbnail" alt="avatar" />
 							</c:if>
 						</div>
-
 					</div>
 
 					<div class="col-sm-9">
 
 						<div class="tab-content">
 							<div class="tab-pane active" id="home">
-								<h:form id="registrationForm" style="color: black">
+								<h:form id="registrationForm" style="color: black" enctype="multipart/form-data">
 
 									<div class="row mb-4">
 										<div class="col">
@@ -92,15 +88,7 @@
 												value="#{alterarPerfilForm.email}" />
 										</div>
 									</div>
-
-									<div class="form-group">
-										<div class="col-xs-6">
-											<label for="image">Url Imagem</label>
-											<h:inputText id="image" styleClass="form-control"
-												value="#{alterarPerfilForm.urlImagem}" />
-										</div>
-									</div>
-
+									
 									<div class="form-group">
 										<div class="col-xs-12">
 											<br />
@@ -116,6 +104,15 @@
 								</h:form>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="nome">Foto do perfil <strong>(jpg,png)</strong></label>
+						<h:form id="uploadFotoForm" enctype="multipart/form-data">
+							<h:inputFile class="col-sm-2" value="#{alterarPerfilForm.file}" />
+							<h:commandButton class="col-sm-1" value="Enviar" action="#{alterarPerfilForm.uploadFoto}" />
+						</h:form>
 					</div>
 				</div>
 			</div>
