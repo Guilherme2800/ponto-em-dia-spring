@@ -1,12 +1,17 @@
 package br.com.pontoemdia.web.form;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -26,6 +31,7 @@ public class AlterarPerfilForm implements Serializable {
 	private Long celular;
 	private String email;
 	private Long cpf;
+	private Part file;
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -44,7 +50,6 @@ public class AlterarPerfilForm implements Serializable {
 		this.setNome(userFull.getNome());
 		this.setEmail(userFull.getEmail());
 		this.setUrlImagem(userFull.getUrlImagem());
-
 	}
 
 	public String getNome() {
@@ -95,10 +100,72 @@ public class AlterarPerfilForm implements Serializable {
 		this.id = id;
 	}
 
+	public Part getFile() {
+		return file;
+	}
+
+	public void setFile(Part file) {
+		this.file = file;
+	}
+
 	public void alterarPerfil() throws IOException {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
 		externalContext.redirect("/usuario?acao=alterarPerfil");
+	}
+
+	public void uploadFoto() throws IOException {
+
+		if(file == null) {
+			this.setUrlImagem("");
+			alterarPerfil();
+			return;
+		}
+		
+		try {
+			InputStream input = file.getInputStream();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			// Diretório onde os arquivos serão salvos dentro do projeto
+			String diretorio = externalContext.getRealPath("assets/usuario-foto");
+
+			// Crie o diretório se não existir
+			File diretorioFile = new File(diretorio);
+			if (!diretorioFile.exists()) {
+				diretorioFile.mkdirs();
+			}
+			
+			if (!getExtensao(file.getSubmittedFileName()).equalsIgnoreCase(".png")
+					&& !getExtensao(file.getSubmittedFileName()).equalsIgnoreCase(".jpg")) {
+
+				this.setUrlImagem("");
+
+				alterarPerfil();
+			}
+
+			// Gere um nome único para o arquivo
+			String nomeArquivo = this.getCpf() + getExtensao(file.getSubmittedFileName());
+
+			// Crie o caminho completo para o arquivo
+			String caminhoCompleto = diretorio + File.separator + nomeArquivo;
+
+			Files.copy(input, new File(caminhoCompleto).toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+			this.setUrlImagem("assets/usuario-foto/" + nomeArquivo);
+
+			alterarPerfil();
+
+			// Exibir uma mensagem de sucesso
+		} catch (IOException e) {
+			// Tratar erros
+			e.printStackTrace();
+			// Exibir uma mensagem de erro
+		}
+	}
+
+	protected String getExtensao(String fileName) {
+		int dotIndex = fileName.lastIndexOf('.');
+		return (dotIndex == -1) ? "" : fileName.substring(dotIndex);
 	}
 
 }
