@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Ponto em dia - Novo usuário</title>
 	<meta charset="utf-8" />
@@ -28,6 +29,7 @@
     <c:set var="pagina" value="cadastrarUsuario" scope="request" />
     <ui:include src="sideBar.xhtml" />
 
+	<p:growl id="growl" showDetail="true" showSummary="false"/>
     <!-- Container Main start -->
     <div class="height-100">
         <div class="container center-block">
@@ -66,15 +68,14 @@
 
                             <div class="row mb-4">
                                 <div class="col">
-                                    <h:inputText id="nascimento" value="#{cadastrarUsuarioForm.nascimento}" class="form-control"
-                                        placeholder="Informe a data de nascimento" autocomplete="off" >
-                                    </h:inputText>
+                                    <p:inputMask id="nascimento" value="#{cadastrarUsuarioForm.nascimento}" class="form-control"
+                                       mask="99/99/9999" placeholder="Informe a data de nascimento" autocomplete="off" />
                                     <h:outputLabel for="nascimento" class="form-label">Nascimento</h:outputLabel>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <h:inputText id="cpf" value="#{cadastrarUsuarioForm.cpf}" class="form-control"
-                                            placeholder="Informe o CPF" autocomplete="off"  />
+                                        <p:inputMask id="cpf" value="#{cadastrarUsuarioForm.cpf}" class="form-control"
+                                            mask="999.999.999-99" converter="convertInput" placeholder="Informe o CPF" autocomplete="off"  />
                                         <h:outputLabel for="cpf" class="form-label">CPF <small>(Apenas números)</small></h:outputLabel>
                                     </div>
                                 </div>
