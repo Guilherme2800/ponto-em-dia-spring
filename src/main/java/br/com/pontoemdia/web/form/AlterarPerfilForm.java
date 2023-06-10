@@ -210,7 +210,7 @@ public class AlterarPerfilForm implements Serializable {
 		List<String> mensagens = new ArrayList<>();
 
 		if(this.celular != 0) {
-			if((this.celular < new Long("10000000000") || this.celular < new Long("99999999999"))) {				
+			if((this.celular < new Long("10000000000") || this.celular > new Long("99999999999"))) {				
 				mensagens.add("Celular inválido");
 			}
 		}
