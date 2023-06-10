@@ -44,9 +44,9 @@
 			<h:form>
 
 				<h:outputLabel for="dataInicial" value="Data inicial: " />
-				<p:inputMask mask="99-99-9999" id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}"/>
+				<p:inputText type="date" id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}"/>
 				<h:outputLabel for="dataFinal" value="Data final: " />
-				<p:inputMask mask="99/99/9999" id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" />
+				<p:inputText type="date" id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" />
 				<h:commandButton value="Pesquisar"  action="#{buscarPontosUsuarioForm.buscar}" styleClass="btn btn-success" />
 
 			</h:form>
