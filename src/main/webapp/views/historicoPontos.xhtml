@@ -3,7 +3,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Ponto em Dia - Historico</title>
@@ -28,6 +29,7 @@
 
 	<ui:include src="sideBar.xhtml" />
 
+	<p:growl id="growl" showDetail="true" showSummary="false"/>
 	<!--Container Main start-->
 
 	<div class="container center-block">
@@ -42,9 +44,9 @@
 			<h:form>
 
 				<h:outputLabel for="dataInicial" value="Data inicial: " />
-				<h:inputText id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}" name="dataInicial" type="date" />
+				<p:inputText type="date" id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}"/>
 				<h:outputLabel for="dataFinal" value="Data final: " />
-				<h:inputText id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" name="dataFinal" type="date" />
+				<p:inputText type="date" id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" />
 				<h:commandButton value="Pesquisar"  action="#{buscarPontosUsuarioForm.buscar}" styleClass="btn btn-success" />
 
 			</h:form>
