@@ -91,7 +91,23 @@
 					   
 					</c:if>
 					
-					<!-- Pagina de historico de cadastro de usu�rios -->  
+					<!-- Pagina de historico de cadastro de grupos -->  
+					
+					<c:if test="${ usuario.tipoUsuario  == 'admin'}">
+					
+					   <c:if test="${ pagina == 'cadastrarUsuario'}">
+					      <a href="grupo?acao=ExibirCadastrarGrupo" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> 
+					      <span class="nav_name">Cadastrar Grupo</span>
+					      </a>
+					   </c:if>
+					   
+					   <c:if test="${ pagina != 'cadastrarUsuario'}">
+					      <a href="grupo?acao=ExibirCadastrarGrupo" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> 
+					      <span class="nav_name">Cadastrar Grupo</span>
+					      </a>
+					   </c:if>
+					   
+					</c:if> 
 					
 					<c:if test="${ pagina == 'perfil'}">
 					      <a href="usuario?acao=ExibirPerfil" class="nav_link active"> <i class='bx bx-user nav_icon'></i> 

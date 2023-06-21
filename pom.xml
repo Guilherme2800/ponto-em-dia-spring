@@ -12,11 +12,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.tsepomaleka</groupId>
-	<artifactId>integrating-spring-and-jsf</artifactId>
+	<groupId>br.com.pontoemdia</groupId>
+	<artifactId>ponto-em-dia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Integrating Spring and JSF</name>
-	<description>A Spring Boot Project to integrate Spring with JSF</description>
+	<name>ponto-em-dia</name>
+	<description>Projeto de software corporativo</description>
 	<packaging>war</packaging>
 
 	<properties>

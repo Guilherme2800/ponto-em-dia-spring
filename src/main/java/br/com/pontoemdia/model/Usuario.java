@@ -1,21 +1,32 @@
 package br.com.pontoemdia.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity(name = "usuario")
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "login" }))
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(unique = true)
 	private String login;
 	private String senha;
 	private String nome;
@@ -32,6 +43,10 @@ public class Usuario {
 	private Long celular;
 	private String email;
 	private Long cpf;
+
+	@ManyToOne
+    @JoinColumn(name = "grupo_id")
+	private Grupo grupo;
 
 	public Long getCpf() {
 		return cpf;
@@ -119,6 +134,36 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	@Override
+	public String toString() {
+		return login;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(login);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(login, other.login);
 	}
 
 }

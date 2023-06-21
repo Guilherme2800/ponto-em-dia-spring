@@ -40,7 +40,7 @@ public class HorasTrabalhadasSemanaAtual extends CalcularHorasTrabalhadas {
 	@Override
 	public String intervalo() {
 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
 
 		Date dataAtual = new Date();
 

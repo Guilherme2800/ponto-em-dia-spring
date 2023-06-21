@@ -104,7 +104,7 @@ public class HorasTrabalhadasMesAtual extends CalcularHorasTrabalhadas {
 	 */
 	@Override
 	public String intervalo() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));

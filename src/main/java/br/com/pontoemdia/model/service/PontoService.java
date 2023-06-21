@@ -55,7 +55,7 @@ public class PontoService {
 	
 	public String buscarHistoricosUsuarioCorrente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdfDatabase = new SimpleDateFormat("yyyy-MM-dd");
 		
 		BuscarPontosUsuarioForm form = (BuscarPontosUsuarioForm) req.getSession().getAttribute("scopedTarget.buscarPontosUsuarioForm");
 
@@ -69,16 +69,18 @@ public class PontoService {
 		Date dataInicial = null;
 		Date dataFinal = null;
 		try {
-			dataInicial = sdf.parse(dataInicialString);
-			dataFinal = sdf.parse(dataFinalString);
+			dataInicial = sdfDatabase.parse(dataInicialString);
+			dataFinal = sdfDatabase.parse(dataFinalString);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
+		SimpleDateFormat sdfInterface = new SimpleDateFormat("dd/MM/YYYY");
+		
 		List<Ponto> pontosUsuario = this.buscarHistoricoDoUsuario((Usuario) req.getSession().getAttribute("usuario"), dataInicial, dataFinal);
 		req.setAttribute("listaPontos", pontosUsuario);
-		req.setAttribute("dataInicio", sdf.format(dataInicial));
-		req.setAttribute("dataFinal", sdf.format(dataFinal));
+		req.setAttribute("dataInicio", sdfInterface.format(dataInicial));
+		req.setAttribute("dataFinal", sdfInterface.format(dataFinal));
 		return "forward:historicoPontos.xhtml";
 	}
 

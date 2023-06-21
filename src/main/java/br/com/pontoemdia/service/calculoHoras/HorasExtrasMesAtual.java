@@ -8,17 +8,20 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.pontoemdia.model.Grupo;
 import br.com.pontoemdia.model.Ponto;
 import br.com.pontoemdia.model.Usuario;
 import br.com.pontoemdia.model.service.PontoService;
+import br.com.pontoemdia.repository.UsuarioRepository;
 
 
 @Service
 public class HorasExtrasMesAtual extends CalcularHorasTrabalhadas {
 
+	UsuarioRepository usuarioRepository;
+	
 	public HorasExtrasMesAtual(PontoService pontoService) {
 		super(pontoService);
 	}
@@ -32,9 +35,11 @@ public class HorasExtrasMesAtual extends CalcularHorasTrabalhadas {
 	 */
 	@Override
 	public String calcularHoras(HttpServletRequest req) {
-		List<Ponto> pontosUsuario = pontoService.buscarPontosMesAtualDoUsuario((Usuario) req.getSession().getAttribute("usuario"));
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
+		
+		List<Ponto> pontosUsuario = pontoService.buscarPontosMesAtualDoUsuario((usuario));
 
-		return gerarHoras(pontosUsuario, 480);
+		return gerarHoras(pontosUsuario, usuario.getGrupo());
 
 	}
 	
@@ -48,7 +53,7 @@ public class HorasExtrasMesAtual extends CalcularHorasTrabalhadas {
 	public String calcularHoras(Usuario user) {
 		List<Ponto> pontosUsuario = pontoService.buscarPontosMesAtualDoUsuario(user);
 
-		return gerarHoras(pontosUsuario, 480);
+		return gerarHoras(pontosUsuario, user.getGrupo());
 
 	}
 	
@@ -76,7 +81,7 @@ public class HorasExtrasMesAtual extends CalcularHorasTrabalhadas {
 		
 		List<Ponto> pontosUsuario = pontoService.buscarHistoricoDoUsuario(user, start, end);
 
-		return gerarHoras(pontosUsuario, 480);
+		return gerarHoras(pontosUsuario, user.getGrupo());
 	}
 	
 	/**
@@ -85,7 +90,12 @@ public class HorasExtrasMesAtual extends CalcularHorasTrabalhadas {
 	 * @param pontosUsuario
 	 * @return
 	 */
-	private String gerarHoras(List<Ponto> pontosUsuario, int qntMinutosNoDia) {
+	private String gerarHoras(List<Ponto> pontosUsuario, Grupo grupo) {
+		
+		int qntMinutosNoDia = 480;
+		if(grupo != null) {
+			qntMinutosNoDia = grupo.getHorasDiariasTrabalhadas() * 60;
+		}
 		
 		long totalMinutos = 0l;
 		Integer totalHorasExtras = 0;

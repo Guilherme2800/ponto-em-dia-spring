@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import br.com.pontoemdia.model.Grupo;
 import br.com.pontoemdia.model.Usuario;
 import br.com.pontoemdia.model.service.UsuarioService;
 
@@ -45,6 +46,7 @@ public class LoginController extends HttpServlet {
 		}
 
 		Usuario usuarioBucado = usuarioService.buscarUsuario(login, senha);
+//		Grupo grupo = usuarioBucado.getGrupo();
 		if (usuarioBucado != null) {
 			req.getSession().setAttribute("usuario", usuarioBucado);
 		} else {

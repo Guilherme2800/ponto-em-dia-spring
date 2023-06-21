@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.pontoemdia.controllers.EntradaController;
+import br.com.pontoemdia.controllers.GrupoController;
 import br.com.pontoemdia.controllers.LoginController;
 import br.com.pontoemdia.controllers.PontoController;
 import br.com.pontoemdia.controllers.UsuarioController;
@@ -37,12 +38,18 @@ public class ServletConfig {
     }
     
     @Bean
+    public ServletRegistrationBean<GrupoController> grupoController() {
+        return new ServletRegistrationBean<>(new GrupoController(), "/grupo");
+    }
+    
+    @Bean
 	public FilterRegistrationBean<AutenticadoFilter> autenticadoFilter() {
 		FilterRegistrationBean<AutenticadoFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new AutenticadoFilter());
 		registrationBean.addUrlPatterns("/entrada");
 		registrationBean.addUrlPatterns("/ponto");
 		registrationBean.addUrlPatterns("/usuario");
+		registrationBean.addUrlPatterns("/grupo");
 		return registrationBean;
 	}
 }

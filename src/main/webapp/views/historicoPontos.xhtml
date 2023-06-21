@@ -66,23 +66,33 @@
                 </h:column>
 				<h:column>
 					<f:facet name="header">Data</f:facet>
-                    #{ponto.data}
+                     <h:outputText value="#{ponto.data}">
+				        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Fortaleza" />
+				    </h:outputText>
                 </h:column>
 				<h:column>
 					<f:facet name="header">Horario chegada</f:facet>
-                    #{ponto.dataEntrada}
+                    <h:outputText value="#{ponto.dataEntrada}">
+				        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Fortaleza" />
+				    </h:outputText>
                 </h:column>
 				<h:column>
 					<f:facet name="header">Horario Almoco</f:facet>
-                    #{ponto.dataAlmoco}
+                    <h:outputText value="#{ponto.dataAlmoco}">
+				        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Fortaleza" />
+				    </h:outputText>
                 </h:column>
 				<h:column>
 					<f:facet name="header">Horario volta do Almoco</f:facet>
-                    #{ponto.dataVoltaAlmoco}
+                    <h:outputText value="#{ponto.dataVoltaAlmoco}">
+				        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Fortaleza" />
+				    </h:outputText>
                 </h:column>
 				<h:column>
 					<f:facet name="header">Horario saida</f:facet>
-                    #{ponto.dataSaida}
+                    <h:outputText value="#{ponto.dataSaida}">
+				        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Fortaleza" />
+				    </h:outputText>
                 </h:column>
 			</h:dataTable>
 		</div>
