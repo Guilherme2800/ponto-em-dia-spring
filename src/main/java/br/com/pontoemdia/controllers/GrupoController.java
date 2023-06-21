@@ -48,6 +48,9 @@ public class GrupoController extends HttpServlet {
 		case "cadastrarGrupo":
 			metodo = grupoService.cadastrarGrupo(req, resp);
 			break;
+		case "ExibirGerenciarGrupos":
+			metodo = grupoService.exibirGerenciarGrupos(req, resp);
+			break;
 		}
 
 		String[] split = metodo.split(":");

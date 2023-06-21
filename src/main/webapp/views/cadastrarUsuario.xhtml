@@ -47,14 +47,14 @@
                                 <div class="col">
                                     <div class="form-outline">
                                         <h:inputText id="login" value="#{cadastrarUsuarioForm.login}" class="form-control"
-                                            placeholder="Informe o login" autocomplete="off" />
+                                            placeholder="Informe o login" autocomplete="off" maxlength="20"/>
                                         <h:outputLabel for="login" class="form-label">Login</h:outputLabel>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
                                         <h:inputSecret id="senha" value="#{cadastrarUsuarioForm.senha}" class="form-control"
-                                            placeholder="Informe a senha" />
+                                            placeholder="Informe a senha" maxlength="20"/>
                                         <h:outputLabel for="senha" class="form-label">Senha</h:outputLabel>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
 
                             <div class="form-outline mb-4">
                                 <h:inputText id="nome" value="#{cadastrarUsuarioForm.nome}" class="form-control"
-                                    placeholder="Informe o nome" autocomplete="off"/>
+                                    placeholder="Informe o nome" autocomplete="off" maxlength="50"/>
                                 <h:outputLabel for="nome" class="form-label">Nome <small>(Primeiro e último)</small></h:outputLabel>
                             </div>
 
@@ -83,7 +83,7 @@
 
                             <div class="form-outline mb-4">
                                 <h:inputText id="cargo" value="#{cadastrarUsuarioForm.cargo}" class="form-control"
-                                    placeholder="Informe o cargo" autocomplete="off"  />
+                                    placeholder="Informe o cargo" autocomplete="off" maxlength="30"  />
                                 <h:outputLabel for="cargo" class="form-label">Cargo</h:outputLabel>
                             </div>
 

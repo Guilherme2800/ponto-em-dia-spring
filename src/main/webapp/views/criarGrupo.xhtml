@@ -58,8 +58,7 @@
 									<div class="form-group">
 										<div class="col-xs-6">
 											<label for="nome">Nome</label>
-											<h:inputText id="nome" styleClass="form-control"
-												value="#{criarGrupoForm.nome}" />
+											<h:inputText id="nome" styleClass="form-control" value="#{criarGrupoForm.nome}" maxlength="30"/>
 										</div>
 									</div>
 
@@ -83,8 +82,7 @@
 										</div>
 
 										<div class="col">
-											<label for="celular">Quantidade de horas trabalhadas
-												por dia</label>
+											<label for="celular">Horas trabalhadas por dia</label>
 											<p:inputMask id="horasPorDia"
 												value="#{criarGrupoForm.horasDiariasTrabalhadas}"
 												class="form-control" mask="99" autocomplete="off" />

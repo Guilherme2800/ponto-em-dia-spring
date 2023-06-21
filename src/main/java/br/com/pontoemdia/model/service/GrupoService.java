@@ -29,6 +29,10 @@ public class GrupoService {
 	public String exibirCadastrarGrupo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return "forward:criarGrupo.xhtml";
 	}
+	
+	public String exibirGerenciarGrupos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		return "forward:gerenciarGrupos.xhtml";
+	}
 
 	public String cadastrarGrupo(HttpServletRequest req, HttpServletResponse resp) {
 		

@@ -142,20 +142,28 @@ public class CriarGrupoForm implements Serializable {
 		}
 
 		if (this.horarioEntrada.isEmpty()) {
-			mensagens.add("Nome é obrigatório");
+			mensagens.add("Horário entrada é obrigatório");
 		}
 
-		if (Integer.parseInt(horarioEntrada.split(":")[0]) > 24
-				|| Integer.parseInt(horarioEntrada.split(":")[1]) > 59) {
+		if (!horarioEntrada.isEmpty() && (Integer.parseInt(horarioEntrada.split(":")[0]) > 24 || Integer.parseInt(horarioEntrada.split(":")[1]) > 59)) {
 			mensagens.add("Horário de entrada invalido");
 		}
 
 		if (this.horariosaida.isEmpty()) {
-			mensagens.add("Nome é obrigatório");
+			mensagens.add("Horário saída é obrigatório");
 		}
 
-		if (Integer.parseInt(horariosaida.split(":")[0]) > 24 || Integer.parseInt(horariosaida.split(":")[1]) > 59) {
+		if (!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) > 24 || Integer.parseInt(horariosaida.split(":")[1]) > 59)) {
 			mensagens.add("Horário de entrada invalido");
+		}
+		
+		if(!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) > Integer.parseInt(horarioEntrada.split(":")[0]))) {
+			mensagens.add("Horários invalidos");
+		}
+		
+		if(!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) == Integer.parseInt(horarioEntrada.split(":")[0])) 
+				&& (Integer.parseInt(horariosaida.split(":")[1]) > Integer.parseInt(horarioEntrada.split(":")[1]))) {
+			mensagens.add("Horários invalidos");
 		}
 
 		return mensagens;

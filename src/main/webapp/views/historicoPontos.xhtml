@@ -43,11 +43,14 @@
 			</h:outputLabel>
 			<h:form>
 
-				<h:outputLabel for="dataInicial" value="Data inicial: " />
+				<h:outputLabel for="dataInicial" value="Data inicial: " style="margin-left: 15px; margin-right: 5px;"/>
 				<p:inputText type="date" id="dataInicial" value="#{buscarPontosUsuarioForm.dataInicial}"/>
-				<h:outputLabel for="dataFinal" value="Data final: " />
+				
+				<h:outputLabel for="dataFinal" value="Data final: "  style="margin-left: 15px; margin-right: 5px;"/>
 				<p:inputText type="date" id="dataFinal" value="#{buscarPontosUsuarioForm.dataFinal}" />
-				<h:commandButton value="Pesquisar"  action="#{buscarPontosUsuarioForm.buscar}" styleClass="btn btn-success" />
+				
+				<h:commandButton value="Pesquisar" style="margin-left: 15px; margin-right: 5px;" 
+				 action="#{buscarPontosUsuarioForm.buscar}" styleClass="btn btn-success" />
 
 			</h:form>
 		</div>
