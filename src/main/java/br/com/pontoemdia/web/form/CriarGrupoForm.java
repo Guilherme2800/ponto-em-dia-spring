@@ -157,12 +157,12 @@ public class CriarGrupoForm implements Serializable {
 			mensagens.add("Horário de entrada invalido");
 		}
 		
-		if(!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) > Integer.parseInt(horarioEntrada.split(":")[0]))) {
+		if(!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) < Integer.parseInt(horarioEntrada.split(":")[0]))) {
 			mensagens.add("Horários invalidos");
 		}
 		
 		if(!horarioEntrada.isEmpty() &&  (Integer.parseInt(horariosaida.split(":")[0]) == Integer.parseInt(horarioEntrada.split(":")[0])) 
-				&& (Integer.parseInt(horariosaida.split(":")[1]) > Integer.parseInt(horarioEntrada.split(":")[1]))) {
+				&& (Integer.parseInt(horariosaida.split(":")[1]) < Integer.parseInt(horarioEntrada.split(":")[1]))) {
 			mensagens.add("Horários invalidos");
 		}
 
