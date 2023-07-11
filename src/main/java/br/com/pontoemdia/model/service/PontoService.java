@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -209,7 +210,37 @@ public class PontoService {
 		
 		req.setAttribute("horasTrabDiaAnterior", horasTrabalhadasDiaAnterior.calcularHoras(req));
 		req.setAttribute("intervaloDia", horasTrabalhadasDiaAnterior.intervalo());
+		
+		req.setAttribute("diasDeAtraso", this.buscarDiasDeAtrasoUsuario(req));
+		
 		return "forward:dashbord.xhtml";
+	}
+	
+	public List<String> buscarDiasDeAtrasoUsuario(HttpServletRequest req){
+		Usuario user = (Usuario) req.getSession().getAttribute("usuario");
+		List<Ponto> lista_pontos = this.buscarPontosMesAtualDoUsuario(user);
+		ArrayList<String> lista_pontos_atraso = new ArrayList<>();
+		
+		if(lista_pontos.size() > 0) {
+			SimpleDateFormat formatacaoComHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			double hora_entrada_grupo;
+			if(user.getGrupo() == null) {
+				hora_entrada_grupo = 8;
+			} else {
+				hora_entrada_grupo = user.getGrupo().getHorarioEntrada();
+			}
+			for(Ponto ponto : lista_pontos) {
+				double hora_entrada_ponto = ponto.getDataEntrada().getHours();
+				double minuto_entrada_ponto = ponto.getDataEntrada().getMinutes() / 100;
+				
+				if((hora_entrada_ponto + minuto_entrada_ponto) > hora_entrada_grupo)
+				{
+					lista_pontos_atraso.add(formatacaoComHora.format(ponto.getDataEntrada()));
+				}
+				
+			}
+		}
+		return lista_pontos_atraso;	
 	}
 
 }
