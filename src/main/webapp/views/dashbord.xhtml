@@ -93,31 +93,63 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="card">
-					<div class="card-header headerCard">
-						<h4>Horas extras trabalhadas</h4>
-					</div>
-					<div class="card-body">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-4 col-xl-4">
-									<div class="card bg-c-blue order-card">
-										<div class="card-block">
-											<h6 class="m-b-20">Mes atual</h6>
-											<h2 class="text-right">
-												<i class="fa fa-cart-plus f-left"></i><span>${horasExtrasMes}
-													Horas</span>
-											</h2>
-											<p class="m-b-0">
-												Periodo: <span class="f-right">${intervaloMes }</span>
-											</p>
+				<div class="row justify-content-around">
+					<div class="card col-md-4 col-xl-4">
+							<div class="card-header headerCard">
+								<h4>Horas extras trabalhadas</h4>
+							</div>
+							<div class="card-body">
+								<div class="container">
+									<div class="row">
+										<div>
+											<div class="card bg-c-blue order-card">
+												<div class="card-block">
+													<h6 class="m-b-20">Mes atual</h6>
+													<h2 class="text-right">
+														<i class="fa fa-cart-plus f-left"></i><span>${horasExtrasMes}
+															Horas</span>
+													</h2>
+													<p class="m-b-0">
+														Periodo: <span class="f-right">${intervaloMes }</span>
+													</p>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+						<div class="card col-md-4 col-xl-4">
+							<div class="card-header headerCard">
+								<h4>Dias de atraso</h4>
+							</div>
+							<div class="card-body">
+								<div class="container">
+									<div class="row">
+										<div>
+											<div class="card bg-c-pink order-card">
+												<div class="card-block">
+													<h6 class="m-b-20">Mes atual</h6>
+													<h2 class="text-right">
+														<i class="fa fa-cart-plus f-left"></i><span>${horasExtrasMes}
+															Horas</span>
+													</h2>
+													<p class="m-b-0">
+														Periodo: <span class="f-right">${intervaloMes }</span>
+													</p>
+													<p class="m-b-0">
+														Dias: <br/>
+														<ui:repeat value="${diasDeAtraso}" var="ponto">
+															<span class="f-left">#{ponto}</span><br/>
+														</ui:repeat>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>
